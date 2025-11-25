@@ -22,18 +22,22 @@ import AbstractShape from "./AbstractShape";
 import { Color } from "../../Const/Enums";
 
 export default class Triangle extends AbstractShape {
-    public constructor(game: GameServer, shiny=Math.random() < 0.000001) {
+    public isAlpha: boolean;
+
+    public constructor(game: GameServer, isAlpha=false, shiny=Math.random() < 0.000001) {
         super(game);
-        
-        this.nameData.values.name = "Triangle";
-        this.healthData.values.health = this.healthData.values.maxHealth = 30;
-        this.physicsData.values.size = 55 * Math.SQRT1_2;
+        this.nameData.values.name = isAlpha ? "Alpha Triangle" : "Triangle";
+
+        this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 900 : 30);
+        this.physicsData.values.size = (isAlpha ? 146.67 : 55) * Math.SQRT1_2;
         this.physicsData.values.sides = 3;
         this.styleData.values.color = shiny ? Color.Shiny : Color.EnemyTriangle;
 
-        this.damagePerTick = 2;
-        this.scoreReward = 25;
+        this.isAlpha = isAlpha;
         this.isShiny = shiny;
+
+        this.damagePerTick = isAlpha ? 3.33 : 2;
+        this.scoreReward = isAlpha ? 576.92 : 25;
 
         if (shiny) {
             this.scoreReward *= 100;

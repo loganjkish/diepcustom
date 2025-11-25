@@ -22,17 +22,22 @@ import AbstractShape from "./AbstractShape";
 import { Color } from "../../Const/Enums";
 
 export default class Square extends AbstractShape {
-    public constructor(game: GameServer, shiny=Math.random() < 0.000001) {
+    public isAlpha: boolean;
+
+    public constructor(game: GameServer, isAlpha=false, shiny=Math.random() < 0.000001) {
         super(game);
-        this.nameData.values.name = "Square";
-        this.healthData.values.health = this.healthData.values.maxHealth = 10;
-        this.physicsData.values.size = 55 * Math.SQRT1_2;
+        this.nameData.values.name = isAlpha ? "Alpha Square" : "Square";
+
+        this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 300 : 10);
+        this.physicsData.values.size = (isAlpha ? 146.67 : 55) * Math.SQRT1_2;
         this.physicsData.values.sides = 4;
         this.styleData.values.color = shiny ? Color.Shiny : Color.EnemySquare;
 
-        this.damagePerTick = 2;
-        this.scoreReward = 10;
+        this.isAlpha = isAlpha;
         this.isShiny = shiny;
+        
+        this.damagePerTick = isAlpha ? 3.33 : 2;
+        this.scoreReward = isAlpha ? 230.77 : 10;
 
         if (shiny) {
             this.scoreReward *= 100;

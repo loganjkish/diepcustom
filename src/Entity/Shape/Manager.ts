@@ -69,23 +69,45 @@ export default class ShapeManager {
             shape.positionData.values.x = x;
             shape.positionData.values.y = y;
             shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
-        } else {
-            // Fields of Shapes
+        } else if (Math.max(x, y) < rightX / 2 && Math.min(x, y) > leftX / 2) {
+            // Big shape zone
             const rand = Math.random();
-            if (rand < .04) {
+            if (rand < .06) {
                 shape = new Pentagon(this.game);
 
                 shape.positionData.values.x = x;
                 shape.positionData.values.y = y;
                 shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
-            } else if (rand < .20) { // < 16%
+            } else if (rand < .65) { 
+                shape = new Triangle(this.game, Math.random() <= 0.1);
+
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            } else { 
+                shape = new Square(this.game, Math.random() <= 0.1);
+
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            }
+        } else {
+            // Fields of Shapes
+            const rand = Math.random();
+            if (rand < .02) {
+                shape = new Pentagon(this.game);
+
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            } else if (rand < .10) { 
                 shape = new Triangle(this.game);
 
                 shape.positionData.values.x = x;
                 shape.positionData.values.y = y;
                 shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
-            } else { // if rand < 80%
-                shape = new Square(this.game);
+            } else { 
+                shape = new Square(this.game, Math.random() <= 0.1);
 
                 shape.positionData.values.x = x;
                 shape.positionData.values.y = y;

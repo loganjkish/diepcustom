@@ -33,7 +33,7 @@ const DevTankDefinitions: TankDefinition[] = [
     {
         id: DevTank.Developer,
         name: "Developer",
-        upgradeMessage: "Use your right mouse button to teleport to where your mouse is",
+        upgradeMessage: "",
         levelRequirement: 45,
         upgrades: [],
         flags: {
